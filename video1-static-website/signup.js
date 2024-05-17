@@ -18,16 +18,24 @@ document.getElementById('signup-form').addEventListener('submit', function(event
     })
       .then(response => response.json())
       .then(data => {
-        if (data.success) {
+        if (data.statusCode == 200) {
           // If the API call is successful, navigate to the welcome page
-          window.location.href = `welcome.html?name=${encodeURIComponent(name)}`;
+          //window.location.href = `dashboard.html?name=${encodeURIComponent(name)}`;
+          alert(data.message);
         } else {
           // Handle errors here
-          alert('Sign-Up failed. Please try again.');
+          alert(`Error: ${data.error}\n\nMessage: ${data.message}`);
         }
       })
       .catch(error => {
         console.error('Error:', error);
         alert('An error occurred. Please try again.');
       });
+  });
+
+
+  // Handle click event for Login button
+document.getElementById('login-btn').addEventListener('click', function() {
+    // Redirect to index.html
+    window.location.href = 'index.html';
   });
