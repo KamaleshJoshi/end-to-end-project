@@ -9,13 +9,18 @@ document.getElementById('signup-form').addEventListener('submit', function(event
     // Construct the API URL with query parameters
     const apiUrl = `https://hul4brlzpi.execute-api.us-east-1.amazonaws.com/test/signup?name=${encodeURIComponent(name)}&emailid=${encodeURIComponent(emailid)}&password=${encodeURIComponent(password)}`;
   
-    // Make the API call
-    fetch(apiUrl)
+    // Make the API call with POST method
+    fetch(apiUrl, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
       .then(response => response.json())
       .then(data => {
         if (data.success) {
           // If the API call is successful, navigate to the welcome page
-          window.location.href = `dashboard.html?name=${encodeURIComponent(name)}`;
+          window.location.href = `welcome.html?name=${encodeURIComponent(name)}`;
         } else {
           // Handle errors here
           alert('Sign-Up failed. Please try again.');
