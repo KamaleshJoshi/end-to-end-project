@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="style.css">
   </head>
   <body>
+    <button class="logout-btn" onclick="logout()">Logout</button>
     <div class="container">
       <div class="wrapper">
         <div class="title"><span id="welcome-message">Welcome</span></div>
@@ -25,6 +26,11 @@
       // Set the welcome message
       const { name } = getQueryParams();
       document.getElementById('welcome-message').textContent = `Welcome ${name}`;
+
+      // Logout function
+      function logout() {
+        window.location.href = 'index.html';
+      }
     </script>
   </body>
 </html>

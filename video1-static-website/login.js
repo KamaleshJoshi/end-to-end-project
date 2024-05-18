@@ -1,17 +1,16 @@
-document.getElementById('signup-form').addEventListener('submit', function(event) {
+document.getElementById('login-form').addEventListener('submit', function(event) {
     event.preventDefault(); // Prevent the default form submission
   
-    // Get form values
-    const name = document.getElementById('name').value;
+    // Get input values
     const emailid = document.getElementById('emailid').value;
     const password = document.getElementById('password').value;
   
-    // Construct the API URL with query parameters
-    const apiUrl = `https://96uu5oouui.execute-api.us-east-1.amazonaws.com/test/signup?name=${encodeURIComponent(name)}&emailid=${encodeURIComponent(emailid)}&password=${encodeURIComponent(password)}`;
+    // Define the API URL with query parameters
+    const apiUrl = `https://96uu5oouui.execute-api.us-east-1.amazonaws.com/test/login?emailid=${encodeURIComponent(emailid)}&password=${encodeURIComponent(password)}`;
   
-    // Make the API call with POST method
+    // Make the GET request to the API
     fetch(apiUrl, {
-      method: 'POST',
+      method: 'GET',
       headers: {
         'Content-Type': 'application/json'
       }
@@ -20,11 +19,10 @@ document.getElementById('signup-form').addEventListener('submit', function(event
       .then(data => {
         if (data.statusCode == 200) {
           // If the API call is successful, navigate to the welcome page
-          //window.location.href = `dashboard.html?name=${encodeURIComponent(name)}`;
-          alert(data.message);
+          window.location.href = `dashboard.html?name=${encodeURIComponent(data.record['name'])}`;
         } else {
           // Handle errors here
-          alert(`Error: ${data.error}\n\nMessage: ${data.message}`);
+          alert(`error: ${data.statusCode} \n message: ${data.error}`);
         }
       })
       .catch(error => {
